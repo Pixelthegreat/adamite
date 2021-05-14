@@ -1,0 +1,16 @@
+struct generator
+	seed: int
+end ;
+
+fn random(seed: int ,) -> int
+	inst rng = generator();
+	rng['seed'] = seed;
+	->rng;
+end ;
+
+fn next(rng: int ,) -> int
+	inst rng = $rng;
+	rng['seed'] = rng['seed'] * 21 + 1 ;
+	rng['seed'] = rng['seed'] % 1000 ;
+	rng['seed'];
+end ;

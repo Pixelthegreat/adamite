@@ -1,0 +1,72 @@
+/* basic variable types */
+int x = 0 ;
+char y = 'a';
+str s = 'hello, world!';
+/* output */
+puts x;
+puts y;
+puts s;
+/* built-in constants */
+puts true;
+puts false;
+puts null;
+/* math */
+puts 1 + 2 * 3;
+puts (1 + 2) * 3;
+puts 'a' + 'b';
+/* function */
+fn add(x: int , y: int ,) -> int
+	x + y;
+end ;
+/* function call */
+puts add(10, 11);
+/* if statement */
+if x == 0
+	puts 'x is equal to 0.';
+end ;
+if x != 0
+	puts 'x is not equal to 0.';
+end ;
+/* for loop */
+for i = 0 to 10
+	puts i;
+end ;
+/* while loop */
+while x != 20
+	int x = x + 1 ;
+	puts x;
+end ;
+/* struct */
+struct person
+	name: str , age: int
+end ;
+/* instance */
+inst me = person();
+me['name'] = 'John Stone';
+me['age'] = '143';
+/* print values in struct instance */
+puts me['name'];
+puts me['age'];
+/* pointers */
+int z = 10 ;
+puts z;
+int xyg = ->z; /* store address in xyg */
+puts $xyg; /* get value at object stored in address xyg */
+/* arrays */
+char [ 100 ] s = 'hello, world!'; /* initialise char array to values of string */
+puts s; /* exceptional case; will print out values of chars consecutive */
+
+int [ 20 ] array = { int , 20 }; /* normal array initialiser */
+for i = 0 to 20
+	array[i] = i;
+	puts array[i];
+end ;
+/* dynamic allocation */
+int ptr = new char [ 100 ]; /* create new char array and return pointer */
+/* keyboard input */
+puts 'what is your name?';
+str name = stdin ;
+/* including files */
+include 'stdlib/string.adm';
+/* format string method (can only format once, very basic) */
+puts ssfmt('hello, %!!! goodbye!!!', name);

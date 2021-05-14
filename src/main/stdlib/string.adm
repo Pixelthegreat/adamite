@@ -1,0 +1,65 @@
+
+/* allocate new string */
+fn stralloc(bufsz: int ,) -> int
+	str memory = '';
+	for i = 0 to bufsz
+		str memory = memory + ' ';
+	end ;
+	->memory;
+end ;
+
+/* allocate new string using references */
+fn ssalloc(bufsz: int ,) -> int
+	$stralloc(bufsz);
+end ;
+
+/* get the length of a string */
+fn strlen(strbuf: int ,) -> int
+	sizeof $strbuf;
+end ;
+
+/* get the length of a string using references */
+fn sslen(strbuf: str ,) -> int
+	strlen(->strbuf);
+end ;
+
+/* copy a string into a buffer */
+fn strcpy(src: int , dst: str ,) -> int
+	str source = $src;
+	for i = 0 to strlen(->dst)
+		source[i] = dst[i];
+	end ;
+	->source;
+end ;
+
+/* copy a string into a buffer */
+fn sscpy(src: str , dst: str ,) -> int
+	$strcpy(->src, dst);
+end ;
+
+/* format a value in a string */
+fn strfmt(src: int , asrc: str ,) -> int
+	str source = $src;
+	char chs = '%';
+	int ret_pos = -1 ;
+	for i = 0 to strlen(src)
+		if source[i] == chs
+			int ret_pos = i + 0;
+		end ;
+	end ;
+	str stringa = $stralloc(ret_pos);
+	for i = 0 to ret_pos
+		stringa[i] = source[i];
+	end ;
+	str stringb = $stralloc(strlen(src) - ret_pos + 1);
+	for i = 0 to strlen(src) - ret_pos + 1
+		stringb[i] = source[i + ret_pos + 1];
+	end ;
+	str stringc = stringa + asrc + stringb;
+	->stringc;
+end ;
+
+/* format a value in a string using references */
+fn ssfmt(src: str , asrc: str ,) -> str
+	$strfmt(->src, asrc);
+end ;

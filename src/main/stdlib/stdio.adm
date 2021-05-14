@@ -1,0 +1,4 @@
+fn print(s: str ,) -> int
+	puts s;
+	0 ;
+end ;

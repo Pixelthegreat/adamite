@@ -1,0 +1,22 @@
+struct bytes
+	bytes: int
+end ;
+
+fn memory( sz: int ,) -> int /* pointer */
+	int new_mem = new char [sz];
+	if new_mem == 0
+		int ret = 0 ; /* bad memory allocation */
+	end ;
+	int ret = new_mem; /* good memory allocation */
+	ret;
+end ;
+
+fn malloc( sz: int ,) -> int
+	memory(sz);
+end ;
+
+fn mbytes( sz: int ,) -> inst
+	inst bytememory = bytes();
+	bytememory['bytes'] = malloc(sz);
+	bytememory;
+end ;
