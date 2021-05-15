@@ -11,6 +11,12 @@ To compile the project, simple type "build" on windows and "./build.sh" on linux
 
 I chose not to use Makefiles for this since I am only beginning to learn how to use them in the first place.
 
+The files "cppbuild.bat" and "./cppbuild.sh" exist for the project now and are in the same folder as the regular build scripts.
+
+### For clarity
+
+The actual folder that the main build scripts are located in is "src/main".
+
 ## syntax
 
 I wanted the syntax to be fairly similar to C's and also to be a bit unique. Some of the syntax is based off of that of languages like Ruby, whilst some of the syntax is entirely made up or close to C.
