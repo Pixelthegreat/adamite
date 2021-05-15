@@ -16,12 +16,14 @@ extern "C" {
 
 #define STORAGE_DEBUG 0 /* determine if we want to debug */
 
+#ifndef __cplusplus
 object **STORAGE_ObjectPointers; /* object pointers */
 object **STORAGE_FreedPointers; /* freed pointers */
 int STORAGE_ObjectPointersSz; /* size of object pointers list */
 int STORAGE_FreedPointersSz; /* size of freed pointers list */
 int STORAGE_ObjectPointersCap; /* capacity of object pointers list */
 int STORAGE_FreedPointersCap; /* capacity of freed pointers list */
+#endif
 
 object *STORAGE_Register(object *o); /* register an object into our list */
 void STORAGE_Free(object *o); /* free an object and add the object pointer to list of freed pointers */

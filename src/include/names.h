@@ -8,13 +8,14 @@
 extern "C" {
 #endif
 
-char **NAMES_VariableNames;
-int NAMES_VariableNamesSz;
-int NAMES_VariableNamesCap;
-
-object **NAMES_Variables;
-int NAMES_VariablesSz;
-int NAMES_VariablesCap;
+#ifndef __cplusplus
+char **NAMES_VariableNames; /* variable names list */
+int NAMES_VariableNamesSz; /* length of variable names list */
+int NAMES_VariableNamesCap; /* capacity of variable names list */
+object **NAMES_Variables; /* variable value list */
+int NAMES_VariablesSz; /* length of variable value list */
+int NAMES_VariablesCap; /* capacity of variable value list */
+#endif
 
 void NAMES_Assign(char* name, object *o); /* add or assign a name */
 int NAMES_FindName(char *name); /* find a name, return the position of it */

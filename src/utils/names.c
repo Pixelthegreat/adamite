@@ -12,6 +12,23 @@
 extern "C" {
 #endif
 
+#ifdef __cplusplus
+/*
+to future self: Although C allows multiple definitions
+of variables through header files, but C++ doesn't. As
+a result, I have moved these to their respective
+location inside the c file. However, since I liked
+the neatness of the original system, I have put this
+inside an ifdef block.
+*/
+char **NAMES_VariableNames; /* variable names list */
+int NAMES_VariableNamesSz; /* length of variable names list */
+int NAMES_VariableNamesCap; /* capacity of variable names list */
+object **NAMES_Variables; /* variable value list */
+int NAMES_VariablesSz; /* length of variable value list */
+int NAMES_VariablesCap; /* capacity of variable value list */
+#endif
+
 void NAMES_Assign(char *name, object *o) {
 	/* reallocate if size is the same as cap */
 	if (NAMES_VariableNamesSz >= NAMES_VariableNamesCap) {
@@ -67,9 +84,9 @@ void NAMES_Init() {
 	NAMES_VariablesSz = 0;
 	NAMES_VariableNamesSz = 0;
 	/* assign constants */
-	NAMES_Assign("true", STORAGE_Register(OBJECT_NewInt(1)));
-	NAMES_Assign("false", STORAGE_Register(OBJECT_NewInt(0)));
-	NAMES_Assign("null", STORAGE_Register(OBJECT_NewInt(0)));
+	NAMES_Assign((char*)"true", STORAGE_Register(OBJECT_NewInt(1)));
+	NAMES_Assign((char*)"false", STORAGE_Register(OBJECT_NewInt(0)));
+	NAMES_Assign((char*)"null", STORAGE_Register(OBJECT_NewInt(0)));
 }
 
 void NAMES_PrintNames() {

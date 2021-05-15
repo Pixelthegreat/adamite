@@ -9,6 +9,15 @@
 extern "C" {
 #endif
 
+#ifdef __cplusplus
+object **STORAGE_ObjectPointers; /* object pointers */
+object **STORAGE_FreedPointers; /* freed pointers */
+int STORAGE_ObjectPointersSz; /* size of object pointers list */
+int STORAGE_FreedPointersSz; /* size of freed pointers list */
+int STORAGE_ObjectPointersCap; /* capacity of object pointers list */
+int STORAGE_FreedPointersCap; /* capacity of freed pointers list */
+#endif
+
 object *STORAGE_Register(object *o) {
 	/* check if we need to resize */
 	if (STORAGE_ObjectPointersSz >= STORAGE_ObjectPointersCap) {
