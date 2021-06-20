@@ -62,13 +62,9 @@ object *OBJECTIO_PrintObject(object *o) {
 
 object *OBJECTIO_Input() {
 	/* new string buffer */
-	char *s = (char*)malloc(100);
+	char *s = (char*)malloc(512);
 	/* read the string into the buffer */
-	#if defined(LINUX)
-	fgets(s, 100, stdin); /* gcc on linux warns about 'gets' function */
-	#else
-	s = gets(s); /* windows doesn't */
-	#endif
+	fgets(s, 512, stdin); /* gcc on linux warns about 'gets' function */
 	/* failure */
 	if (s == NULL)
 		return NULL;
@@ -79,6 +75,8 @@ object *OBJECTIO_Input() {
 		free(s);
 		return NULL;
 	}
+
+	free(s);
 
 	/* return our object */
 	return o;
