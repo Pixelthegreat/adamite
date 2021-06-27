@@ -212,10 +212,8 @@ object *INTERPRETER_VisitStruct(interpreter *i, node *n) {
 		names[j/2] = _val_name;
 		types[j/2] = val_type;
 	}
-	/* create struct */
-	object *st = OBJECT_NewStruct(name, types, names, n_of_vals);
-	/* register struct */
-	st = STORAGE_Register(st);
+	/* create and register struct */
+	object *st = STORAGE_Register(OBJECT_NewStruct(name, types, names, n_of_vals));
 	NAMES_Assign(name, st);
 	/* return struct */
 	return st;
@@ -376,10 +374,7 @@ object *INTERPRETER_VisitFuncDef(interpreter *i, node *n) {
 	/* body of function */
 	node *body_node = NODE_CopyNode(n->children[0]);
 	/* create a new function object */
-	object *f = OBJECT_NewFunction(func_name, ret_type, arg_names, arg_types, n_of_args, body_node);
-
-	/* register the function if not registered */
-	f = STORAGE_Register(f);
+	object *f = STORAGE_Register(OBJECT_NewFunction(func_name, ret_type, arg_names, arg_types, n_of_args, body_node));
 	/* assign the name to the function */
 	NAMES_Assign(func_name, f);
 	/* return an int with the location of the function */
@@ -1057,7 +1052,7 @@ object *INTERPRETER_VisitBinOp(interpreter *i, node *n) {
 	/* error from left */
 	if (i->e != NULL || left == NULL) {
 		/* free left if it isn't in storage */
-		if (!STORAGE_Find(left)) {
+		if (left != NULL && !STORAGE_Find(left)) {
 			/* free pointer */
 			OBJECT_FreeObject(left);
 		}
@@ -1069,7 +1064,7 @@ object *INTERPRETER_VisitBinOp(interpreter *i, node *n) {
 	/* error from right */
 	if (i->e != NULL || right == NULL) {
 		/* free right if it isn't in storage */
-		if (!STORAGE_Find(right) && !STORAGE_FindFreed(right)) {
+		if (right != NULL && !STORAGE_Find(right)) {
 			/* free pointer */
 			OBJECT_FreeObject(right);
 		}
