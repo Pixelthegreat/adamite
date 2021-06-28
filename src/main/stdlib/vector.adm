@@ -1,0 +1,46 @@
+/*
+vector: an array that can automatically
+change in size.
+*/
+struct vector
+	arr: int , /* ptr to array */
+	sz: int , /* number of elements in array */
+	cap: int /* capacity of array */
+end ;
+
+/* create a vector */
+fn vector_new() -> inst
+	inst v = vector();
+	v['arr'] = new int [ 10 ]; /* list of pointers */
+	v['sz'] = 0 ;
+	v['cap'] = 10 ;
+	v;
+end ;
+
+/* push an item into a vector */
+fn vector_push_back(v: inst , x: int ,) -> int
+	/* out of range */
+	if v['sz'] == v['cap']
+		
+		int [ 10 ] arr1 = $v['arr'];
+		int arr = new int [v['cap'] * 2];
+		v['cap'] = v['cap'] * 2;
+		
+		for i = 0 to v['sz']
+			arr[i] = arr1[i];
+		end ;
+		
+		v['arr'] = arr;
+	
+	end ;
+
+	int [ 10 ] arr = $v['arr'];
+	arr[v['sz']] = x;
+	v['sz'] = v['sz'] + 1;
+	0 ;
+end ;
+
+fn vector_getitem(v: inst , idx: int ,) -> int
+	int [ 10 ] a = $v['arr'];
+	a[idx];
+end
